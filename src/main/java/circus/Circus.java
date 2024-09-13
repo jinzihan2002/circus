@@ -42,13 +42,42 @@ public class Circus {
         return total;
     }
 
-    public static void main(String[] args) {
-        makeAnimalsTalk();
-        System.out.println("Total value of animals " + calculateAssetValue(animals));
-        System.out.println("Total value of equipments " + calculateAssetValue(equipments));
     private static void printAllAnimals(ArrayList<Animal> animalArrayList) {
         for (Animal a: animalArrayList) {
             System.out.println(a);
         }
+    }
+
+    public static void main(String[] args) {
+        System.out.println("Number of animals in the array are: " + animals.length);
+        // animals[3] = new Elephant("Dumbo"); // this doesn't work: arrays are immutable
+        // Initialise ArrayList with list representation of static array
+        ArrayList<Animal> animalArrayList = new ArrayList<>(Arrays.asList(animals));
+
+        for (Animal a: animalArrayList) {
+            System.out.println(a);
+        }
+        System.out.println("Size of our animal array list: " + animalArrayList.size());
+
+        Elephant Dumbo = new Elephant("Dumbo");
+        animalArrayList.add(Dumbo);
+        Duck Donald = new Duck("Donald");
+        animalArrayList.add(Donald);
+
+        System.out.println("Before sorting...");
+        printAllAnimals(animalArrayList);
+        System.out.println("Size of our animal array list: " + animalArrayList.size());
+
+        // Get index using indexOf(objectReference)
+        System.out.println("Dumbo is in position: " + (animalArrayList.indexOf(Dumbo) + 1));
+
+        // Sort: can input a custom comparator and combine comparators
+        animalArrayList.sort(AnimalNameComparator);
+
+        System.out.println("After sorting...");
+        printAllAnimals(animalArrayList);
+//        makeAnimalsTalk();
+//        System.out.println("Total value of animals " + calculateAssetValue(animals));
+//        System.out.println("Total value of equipments " + calculateAssetValue(equipments));
     }
 }
